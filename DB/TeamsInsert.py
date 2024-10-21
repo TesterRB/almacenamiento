@@ -2,7 +2,7 @@
 
 from pymongo import MongoClient
 
-Conection = MongoClient("mongodb+srv://marcoaragon:IEOgkNhCRtTlKb9b@marccluster.s41tx.mongodb.net/")
+Conection = MongoClient("mongodb+srv://juandreyes:<db_password>@cluster0.23vz8.mongodb.net/")
 
 try:
     Conection.admin.command('ping')
