@@ -1,54 +1,64 @@
-import express from 'express'
-import cors from 'cors'
-import { DATASTORAGE } from './DB/MongoConnection.js'
-import { TeamServerResponse } from './Routes/Teams.js'
-import { PlayerServerResponse } from './Routes/Players.js'
-
+import express from 'express';
+import cors from 'cors';
+import { connectDB } from './DB/conexion_mongo.js'; // Asegúrate de que la ruta sea correcta
+import { UniversidadServerResponse } from './Routes/universidades.routes.js'; // Ruta hacia universidades
+import { CarrerasServerResponse } from './Routes/carreras.routes.js'; // Ruta hacia carreras
 
 class Server {
 
     constructor() {
-        this.app = express()
+        this.app = express();
 
+        // Definir las rutas base de la API
         this.paths = {
-            teams: '/api/teams',
-            players: '/api/players'
-        }
+            universidades: '/api/universidades', // Ruta para universidades
+            carreras: '/api/carreras' // Ruta para carreras
+        };
 
+        // Conectar a la base de datos
         this.dbMongoConecction();
+
+        // Inicializar middlewares
         this.middlewares();
+
+        // Inicializar rutas
         this.routes();
     }
 
     async dbMongoConecction() {
         try {
-            await DATASTORAGE()
-            console.log('Connection success')
+            await connectDB(); // Usamos la función de conexión de MongoDB
+            console.log('Conexión exitosa a MongoDB');
+        } catch (error) {
+            console.error('No se pudo conectar a la BD Mongo', error);
+            process.exit(1); // Salir si no se puede conectar a la BD
         }
-        catch(error){
-            console.error('No se pudo Conectar a la BD Mongo', error)
-        }
-    }
-
-    routes() {
-        this.app.use(this.paths.teams, TeamServerResponse)
-        this.app.use(this.paths.players, PlayerServerResponse)
     }
 
     middlewares() {
-        this.app.use(cors())
+        // CORS para permitir accesos desde otros dominios
+        this.app.use(cors());
+
+        // Middleware para parsear el body en formato JSON
         this.app.use(express.json());
+
+        // Servir archivos estáticos si fuera necesario (público)
         this.app.use(express.static('public'));
     }
 
+    routes() {
+        // Configuración de las rutas
+        this.app.use(this.paths.universidades, UniversidadServerResponse); // Rutas para universidades
+        this.app.use(this.paths.carreras, CarrerasServerResponse); // Rutas para carreras
+    }
 
     listen() {
-        // Usa el puerto 0 para que el sistema elija un puerto disponible
-        const server = this.app.listen(0, () => {
-            const port = server.address().port; // Obtén el puerto asignado dinámicamente
-            console.log('Servidor encendido en el puerto', port);
+        // Configuración para escuchar el servidor en un puerto
+        const port = process.env.PORT || 3000; // Utiliza el puerto definido en .env o el puerto 3000
+        this.app.listen(port, () => {
+            console.log(`Servidor encendido en el puerto ${port}`);
         });
     }
 }
 
-export {Server}
+export { Server };
