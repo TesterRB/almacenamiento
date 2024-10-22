@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 
 // Definición del esquema de carreras
 const CarrerasSchema = new Schema({
-  NombreDeLaCarrera: {
+  "Nombre de la Carrera": {
     type: String,
     required: true,
     unique: true, // Asegura que no haya carreras duplicadas por nombre
@@ -23,23 +23,23 @@ const CarrerasSchema = new Schema({
     type: String,
     required: true,
   },
-  AsignaturasPrincipales: {
+  "Asignaturas Principales": {
     type: [String], // Especificamos que es un array de Strings
     required: true,
   },
-  RequisitosDeAdmision: {
+  "Requisitos de Admisión": {
     type: String,
     required: true,
   },
-  TasaDeEmpleabilidad: {
+  "Tasa de Empleabilidad": {
     type: String,
     required: true,
   },
   Descripción: {
     type: String,
+    required: false, // Hacer que sea opcional
   }
-},
-{
+}, {
   collection: 'Carreras', // Nombre de la colección en MongoDB
   versionKey: false // Oculta el campo __v generado por defecto
 });

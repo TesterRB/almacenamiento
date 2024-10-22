@@ -1,11 +1,11 @@
 import { response } from "express";
-import { UniversidadesModel } from "../Models/universidades.js"; // Asegúrate de que la ruta del modelo sea correcta
-import { CarrerasModel } from "../Models/carreras.js"; // Para consultar carreras
+import { UniversidadesModel } from "../Models/universidades.js";
+import { CarrerasModel } from "../Models/carreras.js";
 
 // Adicionar una universidad
 const InsertUniversidad = async (req, res = response) => {
     const Body = req.body;
-    
+
     try {
         const universidad = await UniversidadesModel.findOne({ Nombre: Body.Nombre });
 
@@ -65,7 +65,7 @@ const GetUniversidadByName = async (req, res = response) => {
         const universidad = await UniversidadesModel.findOne({
             Nombre: {
                 $regex: Nombre,
-                $options: 'i' // Busca sin importar mayúsculas/minúsculas
+                $options: 'i'
             }
         });
 
@@ -95,8 +95,9 @@ const GetCarrerasByUniversidad = async (req, res = response) => {
     const { Nombre } = req.params;
 
     try {
+        // Asegurarse de usar el campo correcto para buscar carreras
         const carreras = await CarrerasModel.find({
-            Universidad: {
+            "Universidad": {
                 $regex: Nombre,
                 $options: 'i'
             }

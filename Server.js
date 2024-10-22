@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { connectDB } from './DB/conexion_mongo.js'; // Asegúrate de que la ruta sea correcta
 import { UniversidadServerResponse } from './Routes/universidades.routes.js'; // Ruta hacia universidades
-import { CarrerasServerResponse } from './Routes/carreras.routes.js'; // Ruta hacia carreras
+import { CarreraServerResponse } from './Routes/carreras.routes.js'; // Ruta hacia carreras
 
 class Server {
 
@@ -49,12 +49,12 @@ class Server {
     routes() {
         // Configuración de las rutas
         this.app.use(this.paths.universidades, UniversidadServerResponse); // Rutas para universidades
-        this.app.use(this.paths.carreras, CarrerasServerResponse); // Rutas para carreras
+        this.app.use(this.paths.carreras, CarreraServerResponse); // Rutas para carreras
     }
 
     listen() {
         // Configuración para escuchar el servidor en un puerto
-        const port = process.env.PORT || 3000; // Utiliza el puerto definido en .env o el puerto 3000
+        const port = process.env.PORT
         this.app.listen(port, () => {
             console.log(`Servidor encendido en el puerto ${port}`);
         });

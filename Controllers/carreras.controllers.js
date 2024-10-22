@@ -6,12 +6,13 @@ const InsertCarrera = async (req, res = response) => {
     const body = req.body;
 
     try {
-        const carrera = await CarrerasModel.findOne({ NombreDeLaCarrera: body.NombreDeLaCarrera });
+        // Buscar la carrera por el campo correcto "Nombre de la Carrera"
+        const carrera = await CarrerasModel.findOne({ "Nombre de la Carrera": body["Nombre de la Carrera"] });
 
         if (carrera) {
             return res.status(400).json({
                 ok: false,
-                msg: `La carrera ${body.NombreDeLaCarrera} ya existe en la BD`
+                msg: `La carrera ${body["Nombre de la Carrera"]} ya existe en la BD`
             });
         }
 
@@ -61,8 +62,9 @@ const GetCarreraByName = async (req, res = response) => {
     const { NombreDeLaCarrera } = req.params;
 
     try {
+        // Realizar la búsqueda usando el campo correcto "Nombre de la Carrera"
         const carrera = await CarrerasModel.findOne({
-            NombreDeLaCarrera: {
+            "Nombre de la Carrera": {
                 $regex: NombreDeLaCarrera,
                 $options: 'i' // Busca sin importar mayúsculas/minúsculas
             }
@@ -136,7 +138,7 @@ const DeleteCarrera = async (req, res = response) => {
         res.status(200).json({
             ok: true,
             msg: 'Carrera eliminada',
-            data: carreraEliminada.NombreDeLaCarrera
+            data: carreraEliminada["Nombre de la Carrera"]
         });
     } catch (error) {
         console.log(error);
