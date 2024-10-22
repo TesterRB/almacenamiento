@@ -5,7 +5,7 @@ const CarrerasSchema = new Schema({
   "Nombre de la Carrera": {
     type: String,
     required: true,
-    unique: true, // Asegura que no haya carreras duplicadas por nombre
+    unique: true, 
   },
   Facultad: {
     type: String,
@@ -24,7 +24,7 @@ const CarrerasSchema = new Schema({
     required: true,
   },
   "Asignaturas Principales": {
-    type: [String], // Especificamos que es un array de Strings
+    type: [String], 
     required: true,
   },
   "Requisitos de Admisión": {
@@ -37,7 +37,7 @@ const CarrerasSchema = new Schema({
   },
   Descripción: {
     type: String,
-    required: false, // Hacer que sea opcional
+    required: false, 
   }
 }, {
   collection: 'Carreras', // Nombre de la colección en MongoDB

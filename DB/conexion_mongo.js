@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-// Cargar las variables de entorno desde el archivo .env
 dotenv.config();
 
 // Obtener la URI desde el archivo .env
