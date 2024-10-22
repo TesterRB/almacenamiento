@@ -59,13 +59,13 @@ const GetCarreras = async (req, res = response) => {
 
 // Consultar los datos de una carrera por nombre
 const GetCarreraByName = async (req, res = response) => {
-    const { NombreDeLaCarrera } = req.params;
+    const { Nombre } = req.params;
 
     try {
         // Realizar la búsqueda usando el campo correcto "Nombre de la Carrera"
         const carrera = await CarrerasModel.findOne({
             "Nombre de la Carrera": {
-                $regex: NombreDeLaCarrera,
+                $regex: Nombre,
                 $options: 'i' // Busca sin importar mayúsculas/minúsculas
             }
         });
@@ -73,7 +73,7 @@ const GetCarreraByName = async (req, res = response) => {
         if (!carrera) {
             return res.status(404).json({
                 ok: false,
-                msg: `No se encontró ninguna carrera con el nombre ${NombreDeLaCarrera}`
+                msg: `No se encontró ninguna carrera con el nombre ${Nombre}`
             });
         }
 

@@ -95,7 +95,6 @@ const GetCarrerasByUniversidad = async (req, res = response) => {
     const { Nombre } = req.params;
 
     try {
-        // Asegurarse de usar el campo correcto para buscar carreras
         const carreras = await CarrerasModel.find({
             "Universidad": {
                 $regex: Nombre,
