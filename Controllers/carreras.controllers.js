@@ -62,7 +62,6 @@ const GetCarreraByName = async (req, res = response) => {
     const { Nombre } = req.params;
 
     try {
-        // Realizar la búsqueda usando el campo correcto "Nombre de la Carrera"
         const carrera = await CarrerasModel.findOne({
             "Nombre de la Carrera": {
                 $regex: Nombre,
