@@ -1,6 +1,5 @@
 import { Schema, model } from "mongoose";
 
-// Definición del esquema de contrataciones
 const ContractsSchema = new Schema({
   player: {
     type: Schema.Types.ObjectId,
@@ -26,12 +25,11 @@ const ContractsSchema = new Schema({
   versionKey: false // Ocultar el campo __v
 });
 
-// Método para ocultar campos innecesarios en la salida JSON
+
 ContractsSchema.methods.toJSON = function () {
   const { __v, _id, ...data } = this.toObject();
   data.id = _id; // Incluir el MongoID en el response
   return data;
 };
 
-// Crear el modelo basado en el esquema
 export const ContractsModel = model("contrataciones", ContractsSchema);

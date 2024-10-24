@@ -1,6 +1,5 @@
 import { Schema, model } from "mongoose";
 
-// Definición del esquema de jugadores
 const PlayersSchema = new Schema({
   name: {
     type: String,

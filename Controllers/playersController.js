@@ -9,7 +9,7 @@ export const obtenerJugadores = async (req, res) => {
     const [total, jugadores] = await Promise.all([
       PlayersModel.countDocuments(),
       PlayersModel.find({})
-        .populate("team", "name country") // Obtener información del equipo
+        .populate("team", "name country") 
         .skip(Number(desde))
         .limit(Number(limite))
     ]);

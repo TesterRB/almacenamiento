@@ -6,8 +6,8 @@ import { TeamsModel } from "../Models/teams.js";
 export const obtenerContrataciones = async (req, res) => {
   try {
     const contrataciones = await ContractsModel.find({})
-      .populate("player", "name position") // Obtener info del jugador
-      .populate("team", "name country");   // Obtener info del equipo
+      .populate("player", "name position") 
+      .populate("team", "name country");  
 
     res.json({ Ok: true, resp: contrataciones });
   } catch (error) {

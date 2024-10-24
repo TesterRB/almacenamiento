@@ -1,9 +1,6 @@
 from pymongo import MongoClient
 
-# Conexión a MongoDB
 client = MongoClient("mongodb+srv://juandreyes:BBfQH7cn3mGpGdJz@cluster0.23vz8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-
-# Verificar conexión
 try:
     client.admin.command('ping')
     print("Conexión exitosa a MongoDB!")
@@ -36,56 +33,56 @@ except Exception as e:
 # ]
 
 # Datos de carreras
-# jugadores = [
-#     {
-#         "nombre": "Lionel Messi",
-#         "equipo_id": None,  # Este valor será el _id de FC Barcelona
-#         "nacionalidad": "Argentina",
-#         "posicion": "Delantero",
-#         "estatura": 170,
-#         "edad": 36
-#     },
-#     {
-#         "nombre": "Gerard Piqué",
-#         "equipo_id": None,  # _id de FC Barcelona
-#         "nacionalidad": "España",
-#         "posicion": "Defensa",
-#         "estatura": 194,
-#         "edad": 37
-#     },
-#     {
-#         "nombre": "Marcus Rashford",
-#         "equipo_id": None,  # _id de Manchester United
-#         "nacionalidad": "Inglaterra",
-#         "posicion": "Delantero",
-#         "estatura": 185,
-#         "edad": 26
-#     },
-#     {
-#         "nombre": "Harry Maguire",
-#         "equipo_id": None,  # _id de Manchester United
-#         "nacionalidad": "Inglaterra",
-#         "posicion": "Defensa",
-#         "estatura": 194,
-#         "edad": 30
-#     },
-#     {
-#         "nombre": "Carlos Tévez",
-#         "equipo_id": None,  # _id de Boca Juniors
-#         "nacionalidad": "Argentina",
-#         "posicion": "Delantero",
-#         "estatura": 173,
-#         "edad": 39
-#     },
-#     {
-#         "nombre": "Juan Román Riquelme",
-#         "equipo_id": None,  # _id de Boca Juniors
-#         "nacionalidad": "Argentina",
-#         "posicion": "Mediocampista",
-#         "estatura": 182,
-#         "edad": 45
-#     }
-# ]
+jugadores = [
+    {
+        "nombre": "Lionel Messi",
+        "equipo_id": None,  # Este valor será el _id de FC Barcelona
+        "nacionalidad": "Argentina",
+        "posicion": "Delantero",
+        "estatura": 170,
+        "edad": 36
+    },
+    {
+        "nombre": "Gerard Piqué",
+        "equipo_id": None,  # _id de FC Barcelona
+        "nacionalidad": "España",
+        "posicion": "Defensa",
+        "estatura": 194,
+        "edad": 37
+    },
+    {
+        "nombre": "Marcus Rashford",
+        "equipo_id": None,  # _id de Manchester United
+        "nacionalidad": "Inglaterra",
+        "posicion": "Delantero",
+        "estatura": 185,
+        "edad": 26
+    },
+    {
+        "nombre": "Harry Maguire",
+        "equipo_id": None,  # _id de Manchester United
+        "nacionalidad": "Inglaterra",
+        "posicion": "Defensa",
+        "estatura": 194,
+        "edad": 30
+    },
+    {
+        "nombre": "Carlos Tévez",
+        "equipo_id": None,  # _id de Boca Juniors
+        "nacionalidad": "Argentina",
+        "posicion": "Delantero",
+        "estatura": 173,
+        "edad": 39
+    },
+    {
+        "nombre": "Juan Román Riquelme",
+        "equipo_id": None,  # _id de Boca Juniors
+        "nacionalidad": "Argentina",
+        "posicion": "Mediocampista",
+        "estatura": 182,
+        "edad": 45
+    }
+]
 
 contrataciones = [
     {
