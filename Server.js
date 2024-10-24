@@ -1,18 +1,21 @@
 import express from 'express';
 import cors from 'cors';
 import { connectDB } from './DB/conexion_mongo.js'; // Asegúrate de que la ruta sea correcta
-import { UniversidadServerResponse } from './Routes/universidades.routes.js'; // Ruta hacia universidades
-import { CarreraServerResponse } from './Routes/carreras.routes.js'; // Ruta hacia carreras
+import { contractsRouter } from './Routes/contractsRoutes.js'; // Ruta hacia contrataciones
+import { playersRouter } from './Routes/playersRoutes.js'; // Ruta hacia jugadores
+import { teamsRouter } from './Routes/teamsRoutes.js'; // Ruta hacia equipos
 
 class Server {
-
     constructor() {
         this.app = express();
 
         // Definir las rutas base de la API
         this.paths = {
             universidades: '/api/universidades', // Ruta para universidades
-            carreras: '/api/carreras' // Ruta para carreras
+            carreras: '/api/carreras', // Ruta para carreras
+            contratos: '/api/contratos', // Ruta para contrataciones
+            jugadores: '/api/jugadores', // Ruta para jugadores
+            equipos: '/api/equipos' // Ruta para equipos
         };
 
         // Conectar a la base de datos
@@ -48,13 +51,14 @@ class Server {
 
     routes() {
         // Configuración de las rutas
-        this.app.use(this.paths.universidades, UniversidadServerResponse); // Rutas para universidades
-        this.app.use(this.paths.carreras, CarreraServerResponse); // Rutas para carreras
+        this.app.use(this.paths.contratos, contractsRouter); // Rutas para contrataciones
+        this.app.use(this.paths.jugadores, playersRouter); // Rutas para jugadores
+        this.app.use(this.paths.equipos, teamsRouter); // Rutas para equipos
     }
 
     listen() {
         // Configuración para escuchar el servidor en un puerto
-        const port = process.env.PORT
+        const port = process.env.PORT; 
         this.app.listen(port, () => {
             console.log(`Servidor encendido en el puerto ${port}`);
         });
