@@ -18,7 +18,22 @@ export const obtenerEquipos = async (req, res) => {
   }
 };
 
-// Crear un nuevo equipo
+// Obtener un equipo por ID
+export const obtenerEquipoPorId = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const equipo = await TeamsModel.findById(id);
+    if (!equipo) {
+      return res.status(404).json({ Ok: false, resp: "Equipo no encontrado" });
+    }
+    res.json({ Ok: true, resp: equipo });
+  } catch (error) {
+    res.status(500).json({ Ok: false, resp: error });
+  }
+};
+
+// Crear un equipo
 export const crearEquipo = async (req, res) => {
   const { name, country, foundationYear, stadium } = req.body;
 
@@ -41,6 +56,21 @@ export const actualizarEquipo = async (req, res) => {
     const equipoActualizado = await TeamsModel.findByIdAndUpdate(id, { name, country, foundationYear, stadium }, { new: true });
 
     res.json({ Ok: true, resp: equipoActualizado });
+  } catch (error) {
+    res.status(500).json({ Ok: false, resp: error });
+  }
+};
+
+// Eliminar un equipo
+export const eliminarEquipo = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const equipoEliminado = await TeamsModel.findByIdAndDelete(id);
+    if (!equipoEliminado) {
+      return res.status(404).json({ Ok: false, resp: "Equipo no encontrado" });
+    }
+    res.json({ Ok: true, resp: "Equipo eliminado con éxito" });
   } catch (error) {
     res.status(500).json({ Ok: false, resp: error });
   }
